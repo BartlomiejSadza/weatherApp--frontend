@@ -167,3 +167,10 @@ a.secondary {
     filter: invert();
   }
 }
+
+.columnsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

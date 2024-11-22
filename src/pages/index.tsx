@@ -1,9 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
-import columnz from "@/styles/column.module.css";
-import Column from "./components/column";
+import Column from "./Components/Column"; // Adjust the import path as needed
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +26,7 @@ export async function getServerSideProps() {
   const lat = 52.2297;
   const lon = 21.0122;
   const res = await fetch(`https://backend-weatherapp-2oet.onrender.com/endpoint1?lat=${lat}&lon=${lon}`);
-  const data: WeatherData = await res.json();
+  const data: WeatherData[] = await res.json();
 
   return {
     props: {
@@ -42,7 +40,6 @@ interface HomeProps {
 }
 
 export default function Home({ weatherData }: HomeProps): JSX.Element {
-
   return (
     <>
       <Head>
@@ -51,20 +48,20 @@ export default function Home({ weatherData }: HomeProps): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div
-        // className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
-      >
-        <main className={columnz.column}>
-          {weatherData.map((data) => (
-            <Column
-              key={data.date}
-              date={data.date}
-              weatherCode={data.weatherCode}
-              temperature2mMax={data.temperature2mMax}
-              temperature2mMin={data.temperature2mMin}
-              estimatedEnergy={data.estimatedEnergy}
-            />
-          ))}
+      <div className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}>
+        <main className={styles.main}>
+          <div className={styles.columnsContainer}>
+            {weatherData.map((data) => (
+              <Column
+                key={data.date}
+                date={data.date}
+                weatherCode={data.weatherCode}
+                temperature2mMax={data.temperature2mMax}
+                temperature2mMin={data.temperature2mMin}
+                estimatedEnergy={data.estimatedEnergy}
+              />
+            ))}
+          </div>
         </main>
       </div>
     </>

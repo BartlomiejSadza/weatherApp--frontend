@@ -9,12 +9,24 @@ interface ColumnProps {
     estimatedEnergy: number;
 };
 
+function formatDaty(dataString: string): string {
+    const data = new Date(dataString);
+    const day = String(data.getDate()).slice(0, 2);
+    return day;
+}
 export default function Column(columnProps: ColumnProps): JSX.Element {
+
+    const date = (columnProps.date);
+    const weatherCode = columnProps.weatherCode;
+    const maxTemp = columnProps.temperature2mMax;
+    const minTemp = columnProps.temperature2mMin;
+    const estimatedEnergy = columnProps.estimatedEnergy;  
+
   return <div className={styles.column}>
-    <h2>{columnProps.date}</h2>
-    <p>Weather Code: {columnProps.weatherCode}</p>
-    <p>Max Temp: {columnProps.temperature2mMax}</p>
-    <p>Min Temp: {columnProps.temperature2mMin}</p>
-    <p>Estimated Energy: {columnProps.estimatedEnergy}</p>
+    <h2>{formatDaty(date)}</h2>
+    <p>Weather Code: {}</p>
+    <p>Max Temp: {}</p>
+    <p>Min Temp: {}</p>
+    <p>Estimated Energy: {}</p>
   </div>;
 }
