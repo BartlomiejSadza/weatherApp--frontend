@@ -1,0 +1,6 @@
+.column {
+    display: flex;
+    flex-direction:row;
+    background-color: azure;
+    color: black;
+}

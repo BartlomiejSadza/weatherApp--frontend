@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
+import columnz from "@/styles/column.module.css";
+import Column from "./components/column";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,10 +38,11 @@ export async function getServerSideProps() {
 }
 
 interface HomeProps {
-  weatherData: WeatherData;
+  weatherData: WeatherData[];
 }
 
 export default function Home({ weatherData }: HomeProps): JSX.Element {
+
   return (
     <>
       <Head>
@@ -49,11 +52,19 @@ export default function Home({ weatherData }: HomeProps): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
+        // className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
       >
-        <main className={styles.main}>
-          <h1>Weather Data</h1>
-          <pre>{JSON.stringify(weatherData, null, 2)}</pre>
+        <main className={columnz.column}>
+          {weatherData.map((data) => (
+            <Column
+              key={data.date}
+              date={data.date}
+              weatherCode={data.weatherCode}
+              temperature2mMax={data.temperature2mMax}
+              temperature2mMin={data.temperature2mMin}
+              estimatedEnergy={data.estimatedEnergy}
+            />
+          ))}
         </main>
       </div>
     </>
