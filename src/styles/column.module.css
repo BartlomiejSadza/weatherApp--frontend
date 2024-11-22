@@ -1,10 +1,16 @@
 .column {
   display: flex;
   flex-direction: column;
-  background-color: azure;
+  background-color: #00cceb ;
   color: black;
   margin: 20px;
   flex: 1;
   text-wrap: true;
   /* min-width: 150px; Adjust as needed */
+}
+
+.column img {
+  width: 50%;
+  height: auto;
+  margin: auto;
 }
