@@ -1,7 +1,10 @@
 import Head from "next/head";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
-import Column from "./Components/Column"; // Adjust the import path as needed
+import Column from "./components/column";
+import { useEffect, useState } from "react";
+
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,9 +25,13 @@ interface WeatherData {
   estimatedEnergy: number;
 }
 
+
+
+
+
 export async function getServerSideProps() {
-  const lat = 52.2297;
-  const lon = 21.0122;
+  let lat = 30;
+  let lon = 20;
   const res = await fetch(`https://backend-weatherapp-2oet.onrender.com/endpoint1?lat=${lat}&lon=${lon}`);
   const data: WeatherData[] = await res.json();
 
@@ -40,6 +47,24 @@ interface HomeProps {
 }
 
 export default function Home({ weatherData }: HomeProps): JSX.Element {
+  const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
+
+
+  // Pobieranie coordow uzytkownika 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLocation({ 
+          lat: position.coords.latitude,
+           lon: position.coords.longitude
+           });
+        console.log(position.coords);
+      });
+    }
+  }, []);
+
+  // MIEJSCE NA DRUGI HOOK AKTUALIZUJACY ZMIANY WYWOLANE PRZEZ PIERWSZY 
+
   return (
     <>
       <Head>
