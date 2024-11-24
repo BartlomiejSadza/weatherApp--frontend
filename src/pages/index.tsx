@@ -23,26 +23,41 @@ interface WeatherData {
   estimatedEnergy: number;
 }
 
+interface WeeklyData {
+    averagePressure: number,
+    averageSunshineDuration: number,
+    maxTemperature: number,
+    minTemperature: number,
+    precipitationDays: number,
+    weatherSummary: string,
+    windAverage: number
+}
+
 export async function getServerSideProps() {
   let lat = 30;
   let lon = 20;
   const res = await fetch(`https://backend-weatherapp-2oet.onrender.com/endpoint1?lat=${lat}&lon=${lon}`);
   const data: WeatherData[] = await res.json();
+  const res2 = await fetch(`https://backend-weatherapp-2oet.onrender.com/endpoint2?lat=${lat}&lon=${lon}`);
+  const data2: WeeklyData = await res2.json();
 
   return {
     props: {
       weatherData: data,
+      weeklyData: data2,
     },
   };
 }
 
 interface HomeProps {
   weatherData: WeatherData[];
+  weeklyData: WeeklyData;
 }
 
-export default function Home({ weatherData }: HomeProps): JSX.Element {
+export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Element {
   const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
   const [updatedWeatherData, setUpdatedWeatherData] = useState<WeatherData[]>(weatherData);
+  const [updatedWeeklyData, setUpdatedWeeklyData] = useState<WeeklyData>(weeklyData);
 
   // Pobieranie coordow uzytkownika 
   useEffect(() => {
@@ -58,6 +73,8 @@ export default function Home({ weatherData }: HomeProps): JSX.Element {
   }, []);
 
   // MIEJSCE NA DRUGI HOOK AKTUALIZUJACY ZMIANY WYWOLANE PRZEZ PIERWSZY 
+
+  // PIERWSZY ENDPOINT 
 
   useEffect(() => {
     if (location) {
@@ -76,6 +93,28 @@ export default function Home({ weatherData }: HomeProps): JSX.Element {
       };
       fetchWeatherData();
       console.log(updatedWeatherData)
+    }
+  }, [location]);
+
+  // DRUGI ENDPOINT
+
+  useEffect(() => {
+    if (location) {
+      const fetchWeatherData = async () => {
+        try {
+          console.log(`lokalizacja: lat=${location.lat}, lon=${location.lon}`);
+          const res = await fetch(`/api/endpoint2?lat=${location.lat}&lon=${location.lon}`);
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          const data: WeeklyData = await res.json();
+          setUpdatedWeeklyData(data);
+        } catch (error) {
+          console.error("Failed to fetch weather data:", error);
+        }
+      };
+      fetchWeatherData();
+      console.log(updatedWeeklyData)
     }
   }, [location]);
 
@@ -100,6 +139,10 @@ export default function Home({ weatherData }: HomeProps): JSX.Element {
                 estimatedEnergy={data.estimatedEnergy}
               />
             ))}
+          </div>
+          {/* Tygodniowe podsumowanie */}
+          <div className={styles.week}>
+            
           </div>
         </main>
       </div>
