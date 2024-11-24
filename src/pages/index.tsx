@@ -4,8 +4,6 @@ import styles from "@/styles/Home.module.css";
 import Column from "./components/column";
 import { useEffect, useState } from "react";
 
-
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -24,10 +22,6 @@ interface WeatherData {
   temperature2mMin: number;
   estimatedEnergy: number;
 }
-
-
-
-
 
 export async function getServerSideProps() {
   let lat = 30;
@@ -48,22 +42,42 @@ interface HomeProps {
 
 export default function Home({ weatherData }: HomeProps): JSX.Element {
   const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
-
+  const [updatedWeatherData, setUpdatedWeatherData] = useState<WeatherData[]>(weatherData);
 
   // Pobieranie coordow uzytkownika 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setLocation({ 
-          lat: position.coords.latitude,
-           lon: position.coords.longitude
-           });
+          lat: parseFloat(position.coords.latitude.toFixed(3)),
+          lon: parseFloat(position.coords.longitude.toFixed(3))
+        });
         console.log(position.coords);
       });
     }
   }, []);
 
   // MIEJSCE NA DRUGI HOOK AKTUALIZUJACY ZMIANY WYWOLANE PRZEZ PIERWSZY 
+
+  useEffect(() => {
+    if (location) {
+      const fetchWeatherData = async () => {
+        try {
+          console.log(`Fetching weather data for location: lat=${location.lat}, lon=${location.lon}`);
+          const res = await fetch(`/api/endpoint1?lat=${location.lat}&lon=${location.lon}`);
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          const data: WeatherData[] = await res.json();
+          setUpdatedWeatherData(data);
+        } catch (error) {
+          console.error("Failed to fetch weather data:", error);
+        }
+      };
+      fetchWeatherData();
+      console.log(updatedWeatherData)
+    }
+  }, [location]);
 
   return (
     <>
@@ -76,7 +90,7 @@ export default function Home({ weatherData }: HomeProps): JSX.Element {
       <div className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}>
         <main className={styles.main}>
           <div className={styles.columnsContainer}>
-            {weatherData.map((data) => (
+            {updatedWeatherData.map((data) => (
               <Column
                 key={data.date}
                 date={data.date}
