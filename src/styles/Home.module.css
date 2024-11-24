@@ -2,13 +2,19 @@
 
 /* Kontener strony */
 .page {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  align-items: center;
-  justify-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  gap: 20px;
+    max-width: 100%;
+    /* margin: 0 auto; */
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Set the background color to be transparent */
+    background-image: url('https://t3.ftcdn.net/jpg/09/69/07/74/360_F_969077469_CRZpkyFebNJhEfcFCqf8F6XFMXZoq1dg.jpg'); /* Set the background image */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust the alpha value here for the box shadow transparency */
+    margin-top: 105px;
 }
 
 /* Responsywność dla mniejszych ekranów */
@@ -30,15 +36,30 @@
 .columnsContainer {
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
+  overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  -ms-overflow-style: none;  /* Dla Internet Explorer i Edge */
-  scrollbar-width: none;     /* Dla Firefox */
+  -ms-overflow-style: auto;  /* Dla Internet Explorer i Edge */
+  scrollbar-width: auto;     /* Dla Firefox */
 }
 
 /* Ukrycie paska przewijania dla Chrome, Safari i Opera */
 .columnsContainer::-webkit-scrollbar {
-  display: none;
+  display: block;
+  margin-top: 5%;
+}
+
+/* Stylizacja paska przewijania */
+.columnsContainer::-webkit-scrollbar {
+  height: 8px; /* Wysokość paska przewijania */
+}
+
+.columnsContainer::-webkit-scrollbar-thumb {
+  background: #888; /* Kolor uchwytu paska przewijania */
+  border-radius: 4px; /* Zaokrąglenie uchwytu paska przewijania */
+}
+
+.columnsContainer::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Kolor uchwytu paska przewijania podczas najechania */
 }
 
 /* Stylizacja pojedynczej kolumny */
@@ -54,7 +75,7 @@
 }
 
 /* Responsywność dla większych ekranów */
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .columnsContainer {
     flex-wrap: wrap;
     overflow-x: hidden;
