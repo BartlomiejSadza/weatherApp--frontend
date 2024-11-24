@@ -1,67 +1,123 @@
+/* styles/Home.module.css */
+
+/* Kontener strony */
 .page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-
   display: grid;
-  grid-template-rows: 20px 1fr 20px;
+  grid-template-rows: auto 1fr auto;
   align-items: center;
   justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
+  min-height: 100vh;
+  padding: 20px;
+  gap: 20px;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Responsywność dla mniejszych ekranów */
+@media (max-width: 600px) {
   .page {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
+    padding: 10px;
   }
 }
 
+/* Główna zawartość strony */
 .main {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  grid-row-start: 2;
+  width: 100%;
 }
 
-
-.main ol {
-  font-family: var(--font-geist-mono);
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
+/* Kontener kolumn z danymi pogodowymi */
+.columnsContainer {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;  /* Dla Internet Explorer i Edge */
+  scrollbar-width: none;     /* Dla Firefox */
 }
 
-.main li:not(:last-of-type) {
-  margin-bottom: 8px;
+/* Ukrycie paska przewijania dla Chrome, Safari i Opera */
+.columnsContainer::-webkit-scrollbar {
+  display: none;
 }
 
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
+/* Stylizacja pojedynczej kolumny */
+.column {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  margin-right: 16px; /* Odstęp między kolumnami */
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 120px;
 }
 
+/* Responsywność dla większych ekranów */
+@media (min-width: 768px) {
+  .columnsContainer {
+    flex-wrap: wrap;
+    overflow-x: hidden;
+  }
+
+  .column {
+    flex: 1 1 calc(10% - 16px); /* Trzy kolumny w rzędzie */
+  }
+}
+
+/* Dodanie paska przewijania poziomego dla mniejszych ekranów */
+@media (max-width: 600px) {
+  .columnsContainer {
+    overflow-x: scroll;
+    scrollbar-width: auto; /* Dla Firefox */
+  }
+
+  .columnsContainer::-webkit-scrollbar {
+    display: block; /* Dla Chrome, Safari i Opera */
+  }
+}
+
+/* Kontener podsumowania tygodniowego */
+.weeklySummary {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: beige;
+  color: #000;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Stylizacja pojedynczego parametru */
+.parametr {
+  flex: 1 1 calc(33.333% - 32px);
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsywność dla mniejszych ekranów */
+@media (max-width: 767px) {
+  .parametr {
+    flex: 1 1 100%;
+  }
+}
+
+/* Kontener przycisków CTA */
 .ctas {
   display: flex;
   gap: 16px;
 }
 
+/* Stylizacja przycisków CTA */
 .ctas a {
   appearance: none;
   border-radius: 128px;
@@ -69,10 +125,7 @@
   padding: 0 20px;
   border: none;
   border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -82,34 +135,43 @@
   font-weight: 500;
 }
 
+/* Stylizacja przycisku primary */
 a.primary {
   background: var(--foreground);
   color: var(--background);
   gap: 8px;
 }
 
+/* Stylizacja przycisku secondary */
 a.secondary {
   border-color: var(--gray-alpha-200);
   min-width: 180px;
 }
 
+/* Kontener stopki */
 .footer {
-  grid-row-start: 3;
   display: flex;
   gap: 24px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
 }
 
+/* Stylizacja linków w stopce */
 .footer a {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+/* Stylizacja obrazków w stopce */
 .footer img {
   flex-shrink: 0;
 }
 
-/* Enable hover only on non-touch devices */
+/* Stylizacja hover dla przycisków CTA */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
     background: var(--button-primary-hover);
@@ -127,50 +189,9 @@ a.secondary {
   }
 }
 
-@media (max-width: 600px) {
-  .page {
-    padding: 32px;
-    padding-bottom: 80px;
-  }
-
-  .main {
-    align-items: center;
-  }
-
-  .main ol {
-    text-align: center;
-  }
-
-  .ctas {
-    flex-direction: column;
-  }
-
-  .ctas a {
-    font-size: 14px;
-    height: 40px;
-    padding: 0 16px;
-  }
-
-  a.secondary {
-    min-width: auto;
-  }
-
-  .footer {
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
+/* Stylizacja dla trybu ciemnego */
 @media (prefers-color-scheme: dark) {
   .logo {
     filter: invert();
   }
-}
-
-.columnsContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
 }

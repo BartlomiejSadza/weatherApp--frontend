@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
 import Column from "./components/column";
 import { useEffect, useState } from "react";
+import Parametr from "./components/parametry";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -72,7 +73,6 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
     }
   }, []);
 
-  // MIEJSCE NA DRUGI HOOK AKTUALIZUJACY ZMIANY WYWOLANE PRZEZ PIERWSZY 
 
   // PIERWSZY ENDPOINT 
 
@@ -80,7 +80,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
     if (location) {
       const fetchWeatherData = async () => {
         try {
-          console.log(`Fetching weather data for location: lat=${location.lat}, lon=${location.lon}`);
+          console.log(`Pierwszy Endpoint: lat=${location.lat}, lon=${location.lon}`);
           const res = await fetch(`/api/endpoint1?lat=${location.lat}&lon=${location.lon}`);
           if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
@@ -96,13 +96,14 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
     }
   }, [location]);
 
-  // DRUGI ENDPOINT
 
+
+  // DRUGI ENDPOINT
   useEffect(() => {
     if (location) {
       const fetchWeatherData = async () => {
         try {
-          console.log(`lokalizacja: lat=${location.lat}, lon=${location.lon}`);
+          console.log(`Drugi Endpoint: lat=${location.lat}, lon=${location.lon}`);
           const res = await fetch(`/api/endpoint2?lat=${location.lat}&lon=${location.lon}`);
           if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
@@ -118,6 +119,9 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
     }
   }, [location]);
 
+
+
+
   return (
     <>
       <Head>
@@ -128,6 +132,9 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
       </Head>
       <div className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}>
         <main className={styles.main}>
+
+          {/* Kolumny na dni tygodnia */}
+          
           <div className={styles.columnsContainer}>
             {updatedWeatherData.map((data) => (
               <Column
@@ -140,9 +147,20 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
               />
             ))}
           </div>
+
           {/* Tygodniowe podsumowanie */}
-          <div className={styles.week}>
-            
+
+            <h2>Tygodniowe Podsumowanie</h2>
+          <div className={styles.weeklySummary}>
+
+
+            <Parametr parametr={updatedWeeklyData.averagePressure} ikonka={"https://openweathermap.org/img/wn/10d.png"} tytuł={'Ciśnienie'} />
+            <Parametr parametr={updatedWeeklyData.averageSunshineDuration} ikonka={"https://openweathermap.org/img/wn/10d.png"} tytuł={'Średni czas nasłonecznienia'} />
+            <Parametr parametr={updatedWeeklyData.maxTemperature} ikonka={"https://openweathermap.org/img/wn/10d.png"} tytuł={'Maksymalna temperatura'} />
+            <Parametr parametr={updatedWeeklyData.minTemperature} ikonka={"https://openweathermap.org/img/wn/10d.png"} tytuł={'Minimalna temperatura'} />
+            <Parametr parametr={updatedWeeklyData.precipitationDays} ikonka={"https://openweathermap.org/img/wn/10d.png"} tytuł={'Dni opadów'} />
+            <Parametr parametr={updatedWeeklyData.weatherSummary} ikonka={"https://openweathermap.org/img/wn/10d.png"} tytuł={'Podsumowanie pogody'} />
+            <Parametr parametr={updatedWeeklyData.windAverage} ikonka={"https://openweathermap.org/img/wn/10d.png"} tytuł={'Średnia prędkość wiatru'} />
           </div>
         </main>
       </div>
