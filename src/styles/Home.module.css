@@ -1,20 +1,16 @@
-/* styles/Home.module.css */
-
 /* Kontener strony */
 .page {
-    max-width: 100%;
-    /* margin: 0 auto; */
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1); /* Set the background color to be transparent */
-    background-image: url('https://t3.ftcdn.net/jpg/09/69/07/74/360_F_969077469_CRZpkyFebNJhEfcFCqf8F6XFMXZoq1dg.jpg'); /* Set the background image */
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust the alpha value here for the box shadow transparency */
-    margin-top: 105px;
+  max-width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+  padding: 5%;
+  background-image: url('https://t3.ftcdn.net/jpg/09/69/07/74/360_F_969077469_CRZpkyFebNJhEfcFCqf8F6XFMXZoq1dg.jpg'); /* Set the background image */
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
 }
 
 /* Responsywność dla mniejszych ekranów */
@@ -77,8 +73,7 @@
 /* Responsywność dla większych ekranów */
 @media (min-width: 900px) {
   .columnsContainer {
-    flex-wrap: wrap;
-    overflow-x: hidden;
+    justify-content: center;
   }
 
   .column {
@@ -102,111 +97,48 @@
 .weeklySummary {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: space-between;
-  background-color: beige;
+  background-color: rgba(0, 0, 0, 0.5);
   color: #000;
-  padding: 16px;
-  border-radius: 8px;
+  padding: 1%;
+  border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Stylizacja pojedynczego parametru */
 .parametr {
-  flex: 1 1 calc(33.333% - 32px);
-  margin: 16px;
+  flex: 1 1 calc(10% - 32px);
+  margin: 1%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsywność dla mniejszych ekranów */
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
+  .weeklySummary {
+    overflow-x: scroll;
+  }
+  .weeklySummary::-webkit-scrollbar {
+    height: 8px; /* Wysokość paska przewijania */
+  }
+
+  .weeklySummary::-webkit-scrollbar-thumb {
+    background: #888; /* Kolor uchwytu paska przewijania */
+    border-radius: 4px; /* Zaokrąglenie uchwytu paska przewijania */
+  }
+
+  .weeklySummary::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Kolor uchwytu paska przewijania podczas najechania */
+  }
   .parametr {
     flex: 1 1 100%;
-  }
-}
-
-/* Kontener przycisków CTA */
-.ctas {
-  display: flex;
-  gap: 16px;
-}
-
-/* Stylizacja przycisków CTA */
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: none;
-  border: 1px solid transparent;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-/* Stylizacja przycisku primary */
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
-}
-
-/* Stylizacja przycisku secondary */
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 180px;
-}
-
-/* Kontener stopki */
-.footer {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  border-top: 1px solid #e0e0e0;
-}
-
-/* Stylizacja linków w stopce */
-.footer a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Stylizacja obrazków w stopce */
-.footer img {
-  flex-shrink: 0;
-}
-
-/* Stylizacja hover dla przycisków CTA */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-
-  .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
   }
 }
 
