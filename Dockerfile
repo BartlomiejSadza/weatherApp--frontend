@@ -19,6 +19,7 @@ WORKDIR /app/src
 # Zbuduj aplikację Next.js
 RUN npm run build
 
+
 # Ustaw zmienną środowiskową dla Next.js
 ENV NODE_ENV production
 
