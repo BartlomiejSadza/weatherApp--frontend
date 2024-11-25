@@ -152,7 +152,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
         </button>
         <header className={styles.header}>
           <h1>{`Miasto: ${location ? miasto : "Nieznane"}`}</h1>
-          <p>{`Aktualna temperatura: ${updatedWeatherData[0]?.temperature2mMax || "-"}°C`}</p>
+          <p>{`Aktualna temperatura: ${updatedWeatherData[0]?.temperature2mMax.toFixed(1) || "-"}°C`}</p>
         </header>
         <main className={styles.main}>
           <div className={styles.columnsContainer}>

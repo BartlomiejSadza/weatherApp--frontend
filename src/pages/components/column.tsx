@@ -19,9 +19,9 @@ function formatDaty(dataString: string): string {
 export default function Column(columnProps: ColumnProps): JSX.Element {
     const date = (columnProps.date);
     const weatherCode = columnProps.weatherCode;
-    const maxTemp = columnProps.temperature2mMax;
-    const minTemp = columnProps.temperature2mMin;
-    const estimatedEnergy = columnProps.estimatedEnergy;  
+    const maxTemp = columnProps.temperature2mMax.toFixed(1);
+    const minTemp = columnProps.temperature2mMin.toFixed(1);
+    const estimatedEnergy = columnProps.estimatedEnergy.toFixed(2);  
 
     const ikonka = ikonki[weatherCode];
 

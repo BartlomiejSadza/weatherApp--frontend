@@ -11,7 +11,7 @@ export default function Parametr({ parametr, ikonka, tytuł }: ParametrProps) {
     <div className={styles.parametr}>
       <h3>{tytuł}</h3>
       <img src={ikonka} alt={tytuł} />
-      <h6>{parametr}</h6>
+      <h6>{typeof parametr === 'number' ? parametr.toFixed(1) : parametr}</h6>
     </div>
   );
 }

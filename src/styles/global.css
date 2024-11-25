@@ -5,7 +5,7 @@
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
-  --column-light-bg:  rgba(255, 255, 255, 1);
+  --column-light-bg:  rgba(255, 255, 255, 0.2);
   --column-dark-bg: rgba(0, 0, 0, 0.8);
   --footer-light-bg: rgba(0, 0, 0, 0.8);
   --footer-dark-bg: rgba(255, 255, 255, 0.2);
