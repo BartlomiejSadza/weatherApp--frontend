@@ -13,9 +13,6 @@ RUN npm install
 # Skopiuj resztę plików aplikacji do katalogu roboczego
 COPY . .
 
-# Przejdź do katalogu src
-WORKDIR /app/src
-
 # Zbuduj aplikację Next.js
 RUN npm run build
 
