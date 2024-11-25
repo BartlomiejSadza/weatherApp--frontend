@@ -2,8 +2,8 @@
 .column {
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.2) !important;
-  color: black;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  font-weight: bolder;
   margin: 0px 10px;
   flex: 1;
   min-width: 120px;
@@ -16,7 +16,9 @@
   transform: scale(1.05);
 }
 
+
 body.dark .column {
+  color: white !important;
   background-color: var(--column-dark-bg) !important;
 }
 

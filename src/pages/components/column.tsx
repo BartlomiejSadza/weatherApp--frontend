@@ -30,6 +30,6 @@ export default function Column(columnProps: ColumnProps): JSX.Element {
     <img src={ikonka} alt={`ikonka dla weather code: ${weatherCode}`}/>
     <p>Max Temp: {maxTemp}</p>
     <p>Min Temp: {minTemp}</p>
-    <p>Estimated Energy: {estimatedEnergy} kWh</p>
+    <p>Ilość energii: {estimatedEnergy} kWh</p>
   </div>;
 }

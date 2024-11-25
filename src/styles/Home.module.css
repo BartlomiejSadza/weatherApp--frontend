@@ -99,7 +99,6 @@ body.dark .header {
   scroll-snap-align: center;
   margin: 16px;
   padding: 20px;
-  background-color: red;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   max-width: 120px;
@@ -113,7 +112,7 @@ body.dark .header {
 
 body.dark .column {
   background-color: rgba(50, 50, 50, 1);
-  color: #fff;
+  color: #fff !important;
 }
 
 body.dark .column:hover {
@@ -126,7 +125,6 @@ body.dark .column:hover {
   flex-direction: row;
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.3);
-  color: #000;
   padding: 1%;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -162,7 +160,7 @@ body.dark .weeklySummary {
 
 body.dark .parametr {
   background-color: rgba(60, 60, 60, 0.9);
-  color: #fff;
+  color: #fff !important;
 }
 
 .parametr img {
@@ -186,11 +184,10 @@ body.dark .parametr img {
 
 .parametr h6 {
   font-size: 0.9rem;
-  color: #333;
 }
 
 body.dark .parametr h6 {
-  color: #ddd;
+  color: #ddd !important;
 }
 
 /* Responsywność */
