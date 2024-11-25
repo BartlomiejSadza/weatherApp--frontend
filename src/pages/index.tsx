@@ -4,7 +4,8 @@ import styles from "@/styles/Home.module.css";
 import Column from "./components/column";
 import { use, useEffect, useState } from "react";
 import Parametr from "./components/parametry";
-import { checkServerIdentity } from "tls";
+import ikonki from "@/utils/weekly";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -135,6 +136,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
     }
   }, [location]);
 
+
   return (
     <>
       <Head>
@@ -152,7 +154,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
         </button>
         <header className={styles.header}>
           <h1>{`Miasto: ${location ? miasto : "Nieznane"}`}</h1>
-          <p>{`Aktualna temperatura: ${updatedWeatherData[0]?.temperature2mMax.toFixed(1) || "-"}°C`}</p>
+          <p>{`Maksymalna temperatura dzisiaj: ${updatedWeatherData[0].temperature2mMax.toFixed(1) || "-"}°C`}</p>
         </header>
         <main className={styles.main}>
           <div className={styles.columnsContainer}>
@@ -167,13 +169,16 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
               />
             ))}
           </div>
+          <header className={styles.footer_header}>
+            <h1>Podsumowanie tygodnia</h1>
+          </header>
           <footer className={styles.weeklySummary}>
-            <Parametr parametr={updatedWeeklyData.averagePressure} ikonka="/icons/pressure.png" tytuł="Ciśnienie" />
-            <Parametr parametr={updatedWeeklyData.averageSunshineDuration} ikonka="/icons/sun.png" tytuł="Nasłonecznienie" />
-            <Parametr parametr={updatedWeeklyData.maxTemperature} ikonka="/icons/temp-high.png" tytuł="Temp. maksymalna" />
-            <Parametr parametr={updatedWeeklyData.minTemperature} ikonka="/icons/temp-low.png" tytuł="Temp. minimalna" />
-            <Parametr parametr={updatedWeeklyData.precipitationDays} ikonka="/icons/rain.png" tytuł="Dni opadów" />
-            <Parametr parametr={updatedWeeklyData.windAverage} ikonka="/icons/wind.png" tytuł="Prędkość wiatru" />
+            <Parametr parametr={updatedWeeklyData.averagePressure} ikonka={ikonki.pressure} tytuł="Ciśnienie" />
+            <Parametr parametr={updatedWeeklyData.averageSunshineDuration} ikonka={ikonki.sunshine} tytuł="Nasłonecznienie" />
+            <Parametr parametr={updatedWeeklyData.maxTemperature} ikonka={ikonki.tempHigh} tytuł="Temp. maksymalna" />
+            <Parametr parametr={updatedWeeklyData.minTemperature} ikonka={ikonki.tempLow} tytuł="Temp. minimalna" />
+            <Parametr parametr={updatedWeeklyData.precipitationDays} ikonka={ikonki.rain} tytuł="Dni opadów" />
+            <Parametr parametr={updatedWeeklyData.windAverage} ikonka={ikonki.wind} tytuł="Prędkość wiatru" />
           </footer>
         </main>
       </div>

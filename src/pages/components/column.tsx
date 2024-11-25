@@ -28,8 +28,8 @@ export default function Column(columnProps: ColumnProps): JSX.Element {
   return <div className={styles.column}>
     <h2>{formatDaty(date)}</h2>
     <img src={ikonka} alt={`ikonka dla weather code: ${weatherCode}`}/>
-    <p>Max Temp: {maxTemp}</p>
-    <p>Min Temp: {minTemp}</p>
+    <p>Max Temp: {maxTemp}°C</p>
+    <p>Min Temp: {minTemp}°C</p>
     <p>Ilość energii: {estimatedEnergy} kWh</p>
   </div>;
 }

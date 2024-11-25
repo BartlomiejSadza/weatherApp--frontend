@@ -38,13 +38,20 @@
   transition: background-color 0.3s ease;
 }
 
+.lightModeButton {
+  color: #333;
+  cursor: pointer;
+}
+
 .lightModeButton:hover {
-  background-color: #ddd;
+  background-color: #333;
+  color: #fff;
 }
 
 .darkModeButton {
   background: rgba(0, 0, 0, 0.8);
   color: white;
+  cursor: pointer;
 }
 
 .darkModeButton:hover {
@@ -87,6 +94,7 @@ body.dark .header {
   scroll-snap-type: x mandatory;
   scrollbar-width: none; /* Ukrycie paska przewijania */
   height: calc(100vh - 50vh); /* Wyrównanie na osi Y */
+  z-index: 1000;
 }
 
 .columnsContainer::-webkit-scrollbar {
@@ -119,6 +127,22 @@ body.dark .column:hover {
   box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
 }
 
+.footer_header {
+  margin: auto auto;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  position: fixed;
+  bottom: 170px;
+  left: 0;
+  right: 0;
+  border-radius: 8px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+
 /* WeeklySummary jako fixed footer */
 .weeklySummary {
   position: fixed; /* Ustawienie na dole */
@@ -136,7 +160,7 @@ body.dark .column:hover {
   padding: 10px 20px; /* Więcej przestrzeni wewnątrz */
   border-top: 2px solid rgba(255, 255, 255, 0.2); /* Separator u góry */
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); /* Cień do góry */
-  z-index: 1000; /* Zawsze na wierzchu */
+  z-index: 1; /* Zawsze na wierzchu */
   scrollbar-width: thin; 
 }
 
@@ -176,11 +200,12 @@ body.dark .column:hover {
 
 body.dark .weeklySummary {
   background-color: rgba(20, 20, 20, 0.9); /* Ciemniejsze tło w dark mode */
+  color: white !important
 }
 
 body.dark .parametr {
   background-color: rgba(50, 50, 50, 0.9); /* Kontrastowe tło parametrów */
-  color: #fff;
+  color: #fff !important;
 }
 
 .parametr img {
@@ -197,9 +222,8 @@ body.dark .parametr {
 }
 
 .parametr h6 {
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   text-align: center;
-  color: #555;
 }
 
 body.dark .parametr h6 {
