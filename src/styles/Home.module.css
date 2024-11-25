@@ -5,13 +5,13 @@
   margin: 0 auto;
   text-align: center;
   padding: 5%;
-  background-image: url('https://t3.ftcdn.net/jpg/09/69/07/74/360_F_969077469_CRZpkyFebNJhEfcFCqf8F6XFMXZoq1dg.jpg'); /* Set the background image */
+  background-image: url('https://t3.ftcdn.net/jpg/09/69/07/74/360_F_969077469_CRZpkyFebNJhEfcFCqf8F6XFMXZoq1dg.jpg');
   background-size: cover;
-  /* background-attachment: fixed; */
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 10px;
 }
+
 /* Jasny tryb */
 .light {
   background-color: #f0f0f0;
@@ -24,7 +24,7 @@
   color: #f5f5f5;
 }
 
-/* Styl przycisku darkmode */
+/* Styl przycisku Dark Mode */
 .lightModeButton, .darkModeButton {
   position: fixed;
   top: 10px;
@@ -50,19 +50,13 @@
   background-color: #333;
 }
 
-/* Responsywność dla mniejszych ekranów */
-@media (max-width: 600px) {
-  .page {
-    padding: 10px;
-  }
-}
-
 /* Główna zawartość strony */
 .main {
   display: flex;
   flex-direction: column;
   gap: 32px;
   width: 100%;
+  margin-bottom: 70px; /* Odstęp na stopkę */
 }
 
 /* Kontener kolumn z danymi pogodowymi */
@@ -71,134 +65,125 @@
   flex-direction: row;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  -ms-overflow-style: auto;  /* Dla Internet Explorer i Edge */
-  scrollbar-width: auto;     /* Dla Firefox */
+  scrollbar-width: auto;
 }
 
-/* Ukrycie paska przewijania dla Chrome, Safari i Opera */
+/* Ukrycie paska przewijania */
 .columnsContainer::-webkit-scrollbar {
-  display: block;
-  margin-top: 5%;
-}
-
-/* Stylizacja paska przewijania */
-.columnsContainer::-webkit-scrollbar {
-  height: 8px; /* Wysokość paska przewijania */
+  height: 8px;
 }
 
 .columnsContainer::-webkit-scrollbar-thumb {
-  background: #888; /* Kolor uchwytu paska przewijania */
-  border-radius: 4px; /* Zaokrąglenie uchwytu paska przewijania */
+  background: #888;
+  border-radius: 4px;
 }
 
 .columnsContainer::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Kolor uchwytu paska przewijania podczas najechania */
+  background: #555;
 }
 
 /* Stylizacja pojedynczej kolumny */
 .column {
   flex: 0 0 auto;
   scroll-snap-align: center;
-  margin-right: 16px; /* Odstęp między kolumnami */
+  margin-right: 16px;
   padding: 10px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 120px;
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-/* Responsywność dla większych ekranów */
-@media (min-width: 900px) {
-  .columnsContainer {
-    justify-content: center;
-  }
-
-  .column {
-    flex: 1 1 calc(10% - 16px); /* Trzy kolumny w rzędzie */
-  }
+.column:hover {
+  transform: scale(1.05);
 }
 
-/* Dodanie paska przewijania poziomego dla mniejszych ekranów */
-@media (max-width: 600px) {
-  .columnsContainer {
-    overflow-x: scroll;
-    scrollbar-width: auto; /* Dla Firefox */
-  }
-
-  .columnsContainer::-webkit-scrollbar {
-    display: block; /* Dla Chrome, Safari i Opera */
-  }
+body.dark .column {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Kontener podsumowania tygodniowego */
 .weeklySummary {
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.5);
   color: #000;
   padding: 1%;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Dostosowanie tła kolumn */
-  .column {
-    background-color: var(--column-light-bg, rgba(0, 204, 235, 0.8));
-  }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
 
-  body.dark .column {
-    background-color: var(--column-dark-bg, rgba(0, 0, 0, 0.8));
-  }
-
-  /* Stopka */
-  .weeklySummary {
-    background: var(--footer-light-bg, rgba(0, 0, 0, 0.8));
-  }
-
-  body.dark .weeklySummary {
-    background: var(--footer-dark-bg, rgba(255, 255, 255, 0.2));
-  }
+body.dark .weeklySummary {
+  background: rgba(255, 255, 255, 0.2);
+  color: #f5f5f5;
 }
 
 /* Stylizacja pojedynczego parametru */
 .parametr {
-  flex: 1 1 calc(10% - 32px);
-  margin: 1%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 10px;
+  margin: 5px;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-/* Responsywność dla mniejszych ekranów */
-@media (max-width: 1200px) {
+.parametr:hover {
+  transform: scale(1.05);
+}
+
+body.dark .parametr {
+  background-color: rgba(50, 50, 50, 0.7);
+  color: #f5f5f5;
+}
+
+.parametr img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+
+.parametr h3 {
+  font-size: 1rem;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.parametr h6 {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+body.dark .parametr h6 {
+  color: #ddd;
+}
+
+/* Responsywność */
+@media (max-width: 600px) {
+  .page {
+    padding: 10px;
+  }
+
+  .columnsContainer {
+    overflow-x: scroll;
+    scrollbar-width: auto;
+  }
+
   .weeklySummary {
     overflow-x: scroll;
-  }
-  .weeklySummary::-webkit-scrollbar {
-    height: 8px; /* Wysokość paska przewijania */
-  }
-
-  .weeklySummary::-webkit-scrollbar-thumb {
-    background: #888; /* Kolor uchwytu paska przewijania */
-    border-radius: 4px; /* Zaokrąglenie uchwytu paska przewijania */
-  }
-
-  .weeklySummary::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Kolor uchwytu paska przewijania podczas najechania */
-  }
-  .parametr {
-    flex: 1 1 100%;
-  }
-}
-
-/* Stylizacja dla trybu ciemnego */
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
   }
 }

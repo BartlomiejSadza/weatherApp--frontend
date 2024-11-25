@@ -1,35 +1,39 @@
+/* Stylizacja kolumn */
 .column {
   display: flex;
   flex-direction: column;
-  background-color: #00cceb ;
+  background-color: var(--column-light-bg);
   color: black;
   margin: 0px 10px;
-  
   flex: 1;
-  /* text-wrap: true; */
-  min-width: 100px;
-  /* min-height: 300px; */
+  min-width: 120px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-.column img {
-  width: 50%;
-  height: auto;
-  margin: auto;
-}
-/* Dostosowanie tła kolumn */
-.column {
-  background-color: var(--column-light-bg, rgba(0, 204, 235, 0.8));
+.column:hover {
+  transform: scale(1.05);
 }
 
 body.dark .column {
-  background-color: var(--column-dark-bg, rgba(0, 0, 0, 0.8));
+  background-color: var(--column-dark-bg);
 }
 
-/* Stopka */
-.weeklySummary {
-  background: var(--footer-light-bg, rgba(0, 0, 0, 0.8));
+.column img {
+  width: 60%;
+  height: auto;
+  margin: auto;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-body.dark .weeklySummary {
-  background: var(--footer-dark-bg, rgba(255, 255, 255, 0.2));
+.column h2 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.column p {
+  font-size: 0.9rem;
+  margin: 5px 0;
 }
