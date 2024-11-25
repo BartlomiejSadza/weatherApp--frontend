@@ -161,7 +161,7 @@ body.dark .column:hover {
   align-items: center;
   justify-content: center;
   padding: 15px;
-  background-color: rgba(255, 255, 255, 0.3); /* Wyraźniejsze tło */
+  background-color: rgba(255, 255, 255, 0.4); /* Wyraźniejsze tło */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, background-color 0.3s ease;

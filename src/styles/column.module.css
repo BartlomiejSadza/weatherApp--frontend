@@ -14,6 +14,9 @@
 
 .column:hover {
   transform: scale(1.05);
+  color: #333;
+  background-color: rgba(255, 255, 255, 1) !important; /* Jaśniejsze tło przy najechaniu */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Wyraźniejszy cień */
 }
 
 
@@ -29,7 +32,9 @@ body.dark .column {
   border-radius: 50%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+.column:hover img {
+    background-color: rgba(0, 0, 0, 0.3) !important; /* Jaśniejsze tło przy najechaniu */
+}
 .column h2 {
   font-size: 1.2rem;
   margin: 10px 0;
