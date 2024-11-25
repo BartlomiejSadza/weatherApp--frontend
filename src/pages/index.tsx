@@ -2,8 +2,9 @@ import Head from "next/head";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
 import Column from "./components/column";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Parametr from "./components/parametry";
+import { checkServerIdentity } from "tls";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -60,6 +61,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
   const [updatedWeatherData, setUpdatedWeatherData] = useState<WeatherData[]>(weatherData);
   const [updatedWeeklyData, setUpdatedWeeklyData] = useState<WeeklyData>(weeklyData);
   const [darkMode, setDarkMode] = useState(false);
+  const [miasto, setMiasto] = useState("Twoje lokalne miasto");
 
   console.log(styles);
 
@@ -70,6 +72,19 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
       return newMode;
     });
   };
+
+  useEffect(() => {
+    if (location) {
+      const pobierzMiasto = async () => {
+        const res = await fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${location.lat}&longitude=${location.lon}&localityLanguage=pl`
+        );
+        const data = await res.json();
+        setMiasto(data.city);
+      }
+      pobierzMiasto();
+    }
+  }, [location]);
 
   useEffect(() => {
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -136,7 +151,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
           {darkMode ? "Tryb Jasny" : "Tryb Ciemny"}
         </button>
         <header className={styles.header}>
-          <h1>{`Miasto: ${location ? "Twoje lokalne miasto" : "Nieznane"}`}</h1>
+          <h1>{`Miasto: ${location ? miasto : "Nieznane"}`}</h1>
           <p>{`Aktualna temperatura: ${updatedWeatherData[0]?.temperature2mMax || "-"}°C`}</p>
         </header>
         <main className={styles.main}>

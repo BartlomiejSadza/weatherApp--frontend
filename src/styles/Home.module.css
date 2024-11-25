@@ -53,6 +53,7 @@
 
 /* Nagłówek strony */
 .header {
+  margin: auto auto;
   padding: 15px;
   background-color: rgba(0, 0, 0, 0.3);
   color: #fff;
@@ -85,7 +86,7 @@ body.dark .header {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none; /* Ukrycie paska przewijania */
-  height: calc(100vh - 200px); /* Wyrównanie na osi Y */
+  height: calc(100vh - 50vh); /* Wyrównanie na osi Y */
 }
 
 .columnsContainer::-webkit-scrollbar {
