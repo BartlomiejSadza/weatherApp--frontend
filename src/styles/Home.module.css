@@ -142,6 +142,12 @@ body.dark .column:hover {
   transition: background-color 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  .footer_header {
+    display: none; /* Ukrywa footer_header na ekranach mniejszych niż 768px */
+  }
+}
+
 
 /* WeeklySummary jako fixed footer */
 .weeklySummary {
