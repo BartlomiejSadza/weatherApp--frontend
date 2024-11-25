@@ -59,6 +59,11 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
   const [location, setLocation] = useState<{ lat: number; lon: number } | null>(null);
   const [updatedWeatherData, setUpdatedWeatherData] = useState<WeatherData[]>(weatherData);
   const [updatedWeeklyData, setUpdatedWeeklyData] = useState<WeeklyData>(weeklyData);
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   // Pobieranie coordow uzytkownika 
   useEffect(() => {
@@ -130,8 +135,13 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}>
+      <div className={`${styles.page} ${darkMode ? styles.dark : styles.light}`}>
         <main className={styles.main}>
+        <button 
+          className={darkMode ? styles.darkModeButton : styles.lightModeButton} 
+          onClick={toggleDarkMode}>
+          {darkMode ? "Tryb Jasny" : "Tryb Ciemny"}
+        </button>
 
           {/* Kolumny na dni tygodnia */}
           
