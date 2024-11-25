@@ -61,10 +61,21 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
   const [updatedWeeklyData, setUpdatedWeeklyData] = useState<WeeklyData>(weeklyData);
   const [darkMode, setDarkMode] = useState(false);
 
+  console.log(styles);
+
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.className = darkMode ? "light" : "dark";
+    setDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      document.body.className = newMode ? "dark" : "light";
+      return newMode;
+    });
   };
+
+  useEffect(() => {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setDarkMode(prefersDark);
+    document.body.className = prefersDark ? "dark" : "light";
+  }, []);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -117,7 +128,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}>
+      <div className={`${styles.page} ${darkMode ? styles.dark : styles.light}`}>
         <button
           className={darkMode ? styles.darkModeButton : styles.lightModeButton}
           onClick={toggleDarkMode}

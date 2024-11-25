@@ -2,7 +2,7 @@
 .column {
   display: flex;
   flex-direction: column;
-  background-color: var(--column-light-bg);
+  background-color: rgba(255, 255, 255, 0.2) !important;
   color: black;
   margin: 0px 10px;
   flex: 1;
@@ -17,7 +17,7 @@
 }
 
 body.dark .column {
-  background-color: var(--column-dark-bg);
+  background-color: var(--column-dark-bg) !important;
 }
 
 .column img {

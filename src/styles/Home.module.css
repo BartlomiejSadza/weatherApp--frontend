@@ -1,27 +1,28 @@
-/* Kontener strony */
+/* Globalne ustawienia dla strony */
 .page {
   max-width: 100vw;
   height: 100vh;
   margin: 0 auto;
   text-align: center;
   padding: 5%;
-  background-image: url('https://t3.ftcdn.net/jpg/09/69/07/74/360_F_969077469_CRZpkyFebNJhEfcFCqf8F6XFMXZoq1dg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 10px;
+  transition: background-image 0.3s ease, background-color 0.3s ease;
 }
 
 /* Jasny tryb */
 .light {
-  background-color: #f0f0f0;
+  background-image: url('https://t3.ftcdn.net/jpg/09/69/07/74/360_F_969077469_CRZpkyFebNJhEfcFCqf8F6XFMXZoq1dg.jpg') !important;
   color: #333;
 }
 
 /* Ciemny tryb */
 .dark {
+  background-image: url('https://images.pexels.com/photos/3801463/pexels-photo-3801463.jpeg?cs=srgb&dl=pexels-martin-mariani-2162253-3801463.jpg&fm=jpg');
   background-color: #121212;
-  color: #f5f5f5;
+  color: #e0e0e0;
 }
 
 /* Styl przycisku Dark Mode */
@@ -50,6 +51,22 @@
   background-color: #333;
 }
 
+/* Nagłówek strony */
+.header {
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+body.dark .header {
+  background-color: rgba(255, 255, 255, 1);
+  color: #fff;
+}
+
 /* Główna zawartość strony */
 .main {
   display: flex;
@@ -63,52 +80,51 @@
 .columnsContainer {
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scrollbar-width: auto;
+  scrollbar-width: none; /* Ukrycie paska przewijania */
+  height: calc(100vh - 200px); /* Wyrównanie na osi Y */
 }
 
-/* Ukrycie paska przewijania */
 .columnsContainer::-webkit-scrollbar {
-  height: 8px;
+  display: block;
 }
 
-.columnsContainer::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-
-.columnsContainer::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* Stylizacja pojedynczej kolumny */
+/* Stylizacja kolumny */
 .column {
   flex: 0 0 auto;
   scroll-snap-align: center;
-  margin-right: 16px;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 16px;
+  padding: 20px;
+  background-color: red;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   max-width: 120px;
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .column:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
 body.dark .column {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(50, 50, 50, 1);
+  color: #fff;
 }
 
-/* Kontener podsumowania tygodniowego */
+body.dark .column:hover {
+  box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Stopka z tygodniowym podsumowaniem */
 .weeklySummary {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   color: #000;
   padding: 1%;
   border-radius: 10px;
@@ -121,8 +137,8 @@ body.dark .column {
 }
 
 body.dark .weeklySummary {
-  background: rgba(255, 255, 255, 0.2);
-  color: #f5f5f5;
+  background-color: rgba(20, 20, 20, 1) !important;
+  color: #e0e0e0 !important;
 }
 
 /* Stylizacja pojedynczego parametru */
@@ -133,7 +149,7 @@ body.dark .weeklySummary {
   justify-content: center;
   padding: 10px;
   margin: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.4);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, background-color 0.3s ease;
@@ -144,8 +160,8 @@ body.dark .weeklySummary {
 }
 
 body.dark .parametr {
-  background-color: rgba(50, 50, 50, 0.7);
-  color: #f5f5f5;
+  background-color: rgba(60, 60, 60, 0.9);
+  color: #fff;
 }
 
 .parametr img {
@@ -155,6 +171,10 @@ body.dark .parametr {
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.1);
   padding: 5px;
+}
+
+body.dark .parametr img {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .parametr h3 {
