@@ -24,7 +24,7 @@
   color: #f5f5f5;
 }
 
-/* Styl przycisku trybu */
+/* Styl przycisku darkmode */
 .lightModeButton, .darkModeButton {
   position: fixed;
   top: 10px;
@@ -141,6 +141,23 @@
   padding: 1%;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Dostosowanie tła kolumn */
+  .column {
+    background-color: var(--column-light-bg, rgba(0, 204, 235, 0.8));
+  }
+
+  body.dark .column {
+    background-color: var(--column-dark-bg, rgba(0, 0, 0, 0.8));
+  }
+
+  /* Stopka */
+  .weeklySummary {
+    background: var(--footer-light-bg, rgba(0, 0, 0, 0.8));
+  }
+
+  body.dark .weeklySummary {
+    background: var(--footer-dark-bg, rgba(255, 255, 255, 0.2));
+  }
 }
 
 /* Stylizacja pojedynczego parametru */

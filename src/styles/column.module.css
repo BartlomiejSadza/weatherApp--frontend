@@ -16,3 +16,20 @@
   height: auto;
   margin: auto;
 }
+/* Dostosowanie tła kolumn */
+.column {
+  background-color: var(--column-light-bg, rgba(0, 204, 235, 0.8));
+}
+
+body.dark .column {
+  background-color: var(--column-dark-bg, rgba(0, 0, 0, 0.8));
+}
+
+/* Stopka */
+.weeklySummary {
+  background: var(--footer-light-bg, rgba(0, 0, 0, 0.8));
+}
+
+body.dark .weeklySummary {
+  background: var(--footer-dark-bg, rgba(255, 255, 255, 0.2));
+}
