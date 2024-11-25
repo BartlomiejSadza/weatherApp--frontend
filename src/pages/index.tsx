@@ -37,18 +37,10 @@ interface WeeklyData {
 }
 
 export async function getServerSideProps() {
-<<<<<<< HEAD
-  let lat = 30;
-  let lon = 20;
-  const res = await fetch(`https://zadanie-rekr-codibly.azurewebsites.net/endpoint1?lat=30&lon=20`);
-  const data: WeatherData[] = await res.json();
-  const res2 = await fetch(`https://zadanie-rekr-codibly.azurewebsites.net/endpoint2?lat=30&lon=20`);
-=======
   const res = await fetch(`https://zadanie-rekr-codibly.azurewebsites.net/endpoint1?lat=50&lon=20`);
   const data: WeatherData[] = await res.json();
   console.log(data);
   const res2 = await fetch(`https://zadanie-rekr-codibly.azurewebsites.net/endpoint2?lat=50&lon=20`);
->>>>>>> losowe
   const data2: WeeklyData = await res2.json();
   console.log(data2);
 
