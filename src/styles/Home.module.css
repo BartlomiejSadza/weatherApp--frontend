@@ -119,48 +119,68 @@ body.dark .column:hover {
   box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
 }
 
-/* Stopka z tygodniowym podsumowaniem */
+/* WeeklySummary jako fixed footer */
 .weeklySummary {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 1%;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: fixed;
+  position: fixed; /* Ustawienie na dole */
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  display: flex; /* Równanie w rzędzie */
+  flex-direction: row;
+  justify-content: space-between; /* Wszystko zaczyna się od lewej */
+  align-items: center;
+  gap: 15px; /* Odstępy między parametrami */
+  overflow-x: auto; /* Przewijanie poziome */
+  overflow-y: hidden; /* Ukrycie przewijania pionowego */
+  background-color: rgba(0, 0, 0, 0.4); /* Ciemniejsze tło dla kontrastu */
+  padding: 10px 20px; /* Więcej przestrzeni wewnątrz */
+  border-top: 2px solid rgba(255, 255, 255, 0.2); /* Separator u góry */
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); /* Cień do góry */
+  z-index: 1000; /* Zawsze na wierzchu */
+  scrollbar-width: thin; 
 }
 
-body.dark .weeklySummary {
-  background-color: rgba(20, 20, 20, 1) !important;
-  color: #e0e0e0 !important;
+.weeklySummary::-webkit-scrollbar {
+  height: 8px;
 }
 
-/* Stylizacja pojedynczego parametru */
+.weeklySummary::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
+.weeklySummary::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Stylizacja parametrów */
 .parametr {
+  flex: 1 1 150px; /* Stała szerokość elementów */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  margin: 5px;
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.3); /* Wyraźniejsze tło */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .parametr:hover {
   transform: scale(1.05);
+  color: #333;
+  background-color: rgba(255, 255, 255, 1); /* Jaśniejsze tło przy najechaniu */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Wyraźniejszy cień */
+}
+
+body.dark .weeklySummary {
+  background-color: rgba(20, 20, 20, 0.9); /* Ciemniejsze tło w dark mode */
 }
 
 body.dark .parametr {
-  background-color: rgba(60, 60, 60, 0.9);
-  color: #fff !important;
+  background-color: rgba(50, 50, 50, 0.9); /* Kontrastowe tło parametrów */
+  color: #fff;
 }
 
 .parametr img {
@@ -168,40 +188,20 @@ body.dark .parametr {
   height: 40px;
   margin-bottom: 10px;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.1);
-  padding: 5px;
-}
-
-body.dark .parametr img {
-  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .parametr h3 {
   font-size: 1rem;
-  margin: 5px 0;
+  margin: 8px 0;
   text-align: center;
 }
 
 .parametr h6 {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #555;
 }
 
 body.dark .parametr h6 {
-  color: #ddd !important;
-}
-
-/* Responsywność */
-@media (max-width: 600px) {
-  .page {
-    padding: 10px;
-  }
-
-  .columnsContainer {
-    overflow-x: scroll;
-    scrollbar-width: auto;
-  }
-
-  .weeklySummary {
-    overflow-x: scroll;
-  }
+  color: #ccc;
 }
