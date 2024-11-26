@@ -2,8 +2,10 @@ import Head from "next/head";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
 import Column from "./components/column";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Parametr from "./components/parametry";
+import ikonki from "@/utils/weekly";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -61,11 +63,36 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
   const [updatedWeatherData, setUpdatedWeatherData] = useState<WeatherData[]>(weatherData);
   const [updatedWeeklyData, setUpdatedWeeklyData] = useState<WeeklyData>(weeklyData);
   const [darkMode, setDarkMode] = useState(false);
+  const [miasto, setMiasto] = useState("Twoje lokalne miasto");
+
+  console.log(styles);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.className = darkMode ? "light" : "dark";
+    setDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      document.body.className = newMode ? "dark" : "light";
+      return newMode;
+    });
   };
+
+  useEffect(() => {
+    if (location) {
+      const pobierzMiasto = async () => {
+        const res = await fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${location.lat}&longitude=${location.lon}&localityLanguage=pl`
+        );
+        const data = await res.json();
+        setMiasto(data.city);
+      }
+      pobierzMiasto();
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setDarkMode(prefersDark);
+    document.body.className = prefersDark ? "dark" : "light";
+  }, []);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -110,6 +137,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
     }
   }, [location]);
 
+
   return (
     <>
       <Head>
@@ -118,7 +146,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}>
+      <div className={`${styles.page} ${darkMode ? styles.dark : styles.light}`}>
         <button
           className={darkMode ? styles.darkModeButton : styles.lightModeButton}
           onClick={toggleDarkMode}
@@ -126,8 +154,8 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
           {darkMode ? "Tryb Jasny" : "Tryb Ciemny"}
         </button>
         <header className={styles.header}>
-          <h1>{`Miasto: ${location ? "Twoje lokalne miasto" : "Nieznane"}`}</h1>
-          <p>{`Aktualna temperatura: ${updatedWeatherData[0]?.temperature2mMax || "-"}°C`}</p>
+          <h1>{`Miasto: ${location ? miasto : "Nieznane"}`}</h1>
+          <p>{`Maksymalna temperatura dzisiaj: ${updatedWeatherData[0].temperature2mMax.toFixed(1) || "-"}°C`}</p>
         </header>
         <main className={styles.main}>
           <div className={styles.columnsContainer}>
@@ -142,13 +170,16 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
               />
             ))}
           </div>
+          <header className={styles.footer_header}>
+            <h1>Podsumowanie tygodnia</h1>
+          </header>
           <footer className={styles.weeklySummary}>
-            <Parametr parametr={updatedWeeklyData.averagePressure} ikonka="/icons/pressure.png" tytuł="Ciśnienie" />
-            <Parametr parametr={updatedWeeklyData.averageSunshineDuration} ikonka="/icons/sun.png" tytuł="Nasłonecznienie" />
-            <Parametr parametr={updatedWeeklyData.maxTemperature} ikonka="/icons/temp-high.png" tytuł="Temp. maksymalna" />
-            <Parametr parametr={updatedWeeklyData.minTemperature} ikonka="/icons/temp-low.png" tytuł="Temp. minimalna" />
-            <Parametr parametr={updatedWeeklyData.precipitationDays} ikonka="/icons/rain.png" tytuł="Dni opadów" />
-            <Parametr parametr={updatedWeeklyData.windAverage} ikonka="/icons/wind.png" tytuł="Prędkość wiatru" />
+            <Parametr parametr={updatedWeeklyData.averagePressure} ikonka={ikonki.pressure} tytuł="Ciśnienie" />
+            <Parametr parametr={updatedWeeklyData.averageSunshineDuration} ikonka={ikonki.sunshine} tytuł="Nasłonecznienie" />
+            <Parametr parametr={updatedWeeklyData.maxTemperature} ikonka={ikonki.tempHigh} tytuł="Temp. maksymalna" />
+            <Parametr parametr={updatedWeeklyData.minTemperature} ikonka={ikonki.tempLow} tytuł="Temp. minimalna" />
+            <Parametr parametr={updatedWeeklyData.precipitationDays} ikonka={ikonki.rain} tytuł="Dni opadów" />
+            <Parametr parametr={updatedWeeklyData.windAverage} ikonka={ikonki.wind} tytuł="Prędkość wiatru" />
           </footer>
         </main>
       </div>

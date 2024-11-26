@@ -1,5 +1,5 @@
 import styles from '@/styles/column.module.css';
-import ikonki from '@/utils/ikonki'
+import ikonki from '@/utils/ikonki';
 
 interface ColumnProps {
     date: string;
@@ -16,20 +16,24 @@ function formatDaty(dataString: string): string {
     const year = String(data.getFullYear());
     return `${day}/${month}/${year}`;
 }
+
 export default function Column(columnProps: ColumnProps): JSX.Element {
-    const date = (columnProps.date);
-    const weatherCode = columnProps.weatherCode;
-    const maxTemp = columnProps.temperature2mMax;
-    const minTemp = columnProps.temperature2mMin;
-    const estimatedEnergy = columnProps.estimatedEnergy;  
+    const { date, weatherCode, temperature2mMax, temperature2mMin, estimatedEnergy } = columnProps;
+
+    // Użycie opcjonalnego łańcuchowania, aby uniknąć błędów, jeśli wartości są undefined
+    const maxTemp = temperature2mMax?.toFixed(1) ?? "N/D";
+    const minTemp = temperature2mMin?.toFixed(1) ?? "N/D";
+    const estimatedEnergyFormatted = estimatedEnergy?.toFixed(2) ?? "N/D";  
 
     const ikonka = ikonki[weatherCode];
 
-  return <div className={styles.column}>
-    <h2>{formatDaty(date)}</h2>
-    <img src={ikonka} alt={`ikonka dla weather code: ${weatherCode}`}/>
-    <p>Max Temp: {maxTemp}</p>
-    <p>Min Temp: {minTemp}</p>
-    <p>Estimated Energy: {estimatedEnergy} kWh</p>
-  </div>;
+    return (
+        <div className={styles.column}>
+            <h2>{formatDaty(date)}</h2>
+            <img src={ikonka} alt={`Ikona dla weather code: ${weatherCode}`}/>
+            <p>Max Temp: {maxTemp}°C</p>
+            <p>Min Temp: {minTemp}°C</p>
+            <p>Ilość energii: {estimatedEnergyFormatted} kWh</p>
+        </div>
+    );
 }
