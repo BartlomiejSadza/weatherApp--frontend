@@ -37,12 +37,12 @@ interface WeeklyData {
 }
 
 export async function getServerSideProps() {
-  let lat = 30;
-  let lon = 20;
-  const res = await fetch(`https://backend-weatherapp-2oet.onrender.com/endpoint1?lat=${lat}&lon=${lon}`);
+  const res = await fetch(`https://zadanie-rekr-codibly.azurewebsites.net/endpoint1?lat=50&lon=20`);
   const data: WeatherData[] = await res.json();
-  const res2 = await fetch(`https://backend-weatherapp-2oet.onrender.com/endpoint2?lat=${lat}&lon=${lon}`);
+  console.log(data);
+  const res2 = await fetch(`https://zadanie-rekr-codibly.azurewebsites.net/endpoint2?lat=50&lon=20`);
   const data2: WeeklyData = await res2.json();
+  console.log(data2);
 
   return {
     props: {
@@ -62,7 +62,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
   const [updatedWeatherData, setUpdatedWeatherData] = useState<WeatherData[]>(weatherData);
   const [updatedWeeklyData, setUpdatedWeeklyData] = useState<WeeklyData>(weeklyData);
   const [darkMode, setDarkMode] = useState(false);
-  const [miasto, setMiasto] = useState("Twoje lokalne miasto");
+  const [miasto, setMiasto] = useState("Kraków");
 
   console.log(styles);
 
