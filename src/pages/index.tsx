@@ -154,7 +154,7 @@ export default function Home({ weatherData, weeklyData }: HomeProps): JSX.Elemen
           {darkMode ? "Tryb Jasny" : "Tryb Ciemny"}
         </button>
         <header className={styles.header}>
-          <h1>{`Miasto: ${location ? miasto : "Nieznane"}`}</h1>
+          <h1>{`Miasto: ${location ? miasto : "Kraków "}`}</h1>
           <p>{`Maksymalna temperatura dzisiaj: ${updatedWeatherData[0].temperature2mMax.toFixed(1) || "-"}°C`}</p>
         </header>
         <main className={styles.main}>
