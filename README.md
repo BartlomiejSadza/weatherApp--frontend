@@ -1,40 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Weather Forecast and Solar Energy Prediction Application
 
-## Getting Started
+This repository contains the solution for the recruitment task provided by Codibly IT Academy. The application is built with the following stack:
 
-First, run the development server:
+- **Backend**: TypeScript + Express
+- **Frontend**: React + TypeScript + Next.js
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application provides weather forecasts for the next 7 days and estimates solar energy production based on the forecasted weather conditions.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Backend
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Features
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+- **Two API Endpoints**:
+  1. **7-day Weather Forecast**:
+     - Returns:
+       - Date
+       - Weather code
+       - Minimum and maximum temperatures
+       - Estimated energy production in kWh
+  2. **Weekly Summary**:
+     - Returns:
+       - Average pressure
+       - Average daily sun exposure time
+       - Extreme temperatures of the week
+       - General weather summary (e.g., "Rainy week" or "Dry week")
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Calculation**:
+  - Solar energy production:
+    ```
+    Energy [kWh] = Power [kW] x Sun Exposure Time [h] x Panel Efficiency
+    ```
+    - Power = 2.5 kW
+    - Efficiency = 20%
 
-## Learn More
+- **Validation**:
+  - Validates latitude and longitude inputs.
+  - Handles errors from external API.
 
-To learn more about Next.js, take a look at the following resources:
+- **Data Integration**:
+  - Fetches weather data from the [Open-Meteo API](https://open-meteo.com/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the backend repository:
+   ```bash
+   git clone <backend-repo-url>
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+## Frontend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+- **Weather Table**:
+  - Displays:
+    - Date (DD/MM/YYYY)
+    - Weather icon
+    - Minimum and maximum temperatures
+    - Estimated energy production (kWh)
+
+- **Footer Summary**:
+  - Displays:
+    - Weekly extreme temperatures
+    - Average pressure
+    - Average sun exposure time
+    - General weather summary
+
+- **Extras**:
+  - Automatically detects user location.
+  - Responsiveness and Dark Mode.
