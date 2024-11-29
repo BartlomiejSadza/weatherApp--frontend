@@ -42,20 +42,6 @@ The application provides weather forecasts for the next 7 days and estimates sol
 - **Data Integration**:
   - Fetches weather data from the [Open-Meteo API](https://open-meteo.com/).
 
-### Setup
-
-1. Clone the backend repository:
-   ```bash
-   git clone <backend-repo-url>
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
 
 ## Frontend
 
