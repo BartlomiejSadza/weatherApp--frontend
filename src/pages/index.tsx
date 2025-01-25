@@ -38,15 +38,26 @@ interface WeeklyData {
 export async function getServerSideProps() {
 	let lat = 30;
 	let lon = 20;
-	const res = await fetch(
-		`https://python-backend-weatherapp.azurewebsites.net/forecast?lat=${lat}&lon=${lon}`
-	);
-	const data: WeatherData[] = await res.json();
-	const res2 = await fetch(
-		`https://python-backend-weatherapp.azurewebsites.net/weekly_summary?lat=${lat}&lon=${lon}`
-	);
-	
-	const data2: WeeklyData = await res2.json();
+	let data: WeatherData[];
+	let data2: WeeklyData;
+	try {
+		const res = await fetch(
+			`https://python-backend-weatherapp.azurewebsites.net/forecast?lat=${lat}&lon=${lon}`
+		);
+		if (!res.ok) throw new Error('Primary endpoint failed');
+		data = await res.json();
+		const res2 = await fetch(
+			`https://python-backend-weatherapp.azurewebsites.net/weekly_summary?lat=${lat}&lon=${lon}`
+		);
+		if (!res2.ok) throw new Error('Primary endpoint failed');
+		data2 = await res2.json();
+	} catch (error) {
+		console.log('Falling back to secondary endpoint');
+		const res = await fetch(`https://backend-weatherapp-2oet.onrender.com/endpoint1?lat=${lat}&lon=${lon}`);
+		data = await res.json();
+		const res2 = await fetch(`https://backend-weatherapp-2oet.onrender.com/endpoint2?lat=${lat}&lon=${lon}`);
+		data2 = await res2.json();
+	}
 
 	return {
 		props: {
