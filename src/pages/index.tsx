@@ -45,6 +45,7 @@ export async function getServerSideProps() {
 	const res2 = await fetch(
 		`https://python-backend-weatherapp.azurewebsites.net/weekly_summary?lat=${lat}&lon=${lon}`
 	);
+	
 	const data2: WeeklyData = await res2.json();
 
 	return {
