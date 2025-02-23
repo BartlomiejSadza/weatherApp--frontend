@@ -2,7 +2,7 @@
 
 This repository contains the solution for the recruitment task provided by Codibly IT Academy. The application is built with the following stack:
 
-- **Backend**: TypeScript + Express
+- **Backend**: Python + FastAPI
 - **Frontend**: React + TypeScript + Next.js
 
 ## Project Overview
